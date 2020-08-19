@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Fixtures">
+	<select id="selectAll" resultType="erp.spring.dto.FixDTO">
+		select * from fixtures
+	</select>
+	<insert id="insert">
+		insert into fixtures(name,category,category_detail,code,model_name,quantity,quantity_unit,manufacture,purchase_date)
+		value(#{name},#{category},#{category_detail},#{code},#{model_name},#{quantity},#{quantity_unit},#{manufacture},#{purchase_date})
+	</insert>
+	<insert id="insertImage">
+		insert into fixtures_file(parent_seq,oriname,sysname)
+		value(#{parent_seq},#{oriname},#{sysname})
+	</insert>
+	<select id="getNextval" resultType="int">
+		SELECT LAST_INSERT_ID();
+	</select>
+</mapper>
