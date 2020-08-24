@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<!-- 좌측 메뉴용 css -->
+<link rel="stylesheet" type="text/css" href="/resources/css/menu_bar.css">
+<script src="/resources/js/menu_bar.js"></script>
 <title>비품 관리</title>
 <script>
 	$(function(){
@@ -15,9 +18,13 @@
 		$("#addFixture").on("click",function(){
 			location.href = "/fixtures/toFixturesEnrollView";
 		})
+		$(".row.list").on("click",function(){
+			location.href = "/fixtures/toFixturesView?seq="+$(this).find(".seq").text();
+		})
 	})
 </script>
 <style>
+	/* 메뉴바CSS by 예지 */
 	@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap&subset=korean');
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@100;300;400;500;700;900&display=swap');
 	@import url('https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500;700&display=swap');
@@ -31,6 +38,10 @@
 	nav .gnb > li > .on > li > a { color:#fff; text-align:left; display:block; padding:15px 30px; font-size:14px; background:#9e8c6d;}
 	nav .gnb > li > .on > li > a:hover {background:#78684a;}
 	.on { position:absolute;  z-index:10; width:100%; left:50%; top:30px; border:1px solid #ddd;display:block; background:#fff; display:none; }
+	nav {z-index:10;}
+	.main_contents {z-index:1;}
+	
+	/* 비품 목록 부분 CSS by 예지 */
 	.main_contents{position:absolute; left:260px;padding:20px 0 0 50px;font-family: 'Noto Sans KR', sans-serif;}
 	.main_contents > .title {font-size:20px;font-weight: bold;}
 	.main_contents > .search_area {padding-top:20px;}
@@ -42,6 +53,7 @@
 	.col2 {width: 20%;}
 	.col3 {width: 40%;}
 	.col4 {width: 20%;}
+	.row.list:hover{background-color: #d6d6d6; cursor:pointer;}
 </style>
 </head>
 <body>
@@ -69,11 +81,11 @@
 		</div>
 		<div class="fixtures_list">
 			<div class="row head">
-				<span class="cell col1"></span>
-				<span class="cell col1">상품명</span>
-				<span class="cell col2">상품코드</span>
-				<span class="cell col3">수량</span>
-				<span class="cell col4">구매날짜</span>
+				<span class="cell col2"></span>
+				<span class="cell col3">상품명</span>
+				<span class="cell col1">상품코드</span>
+				<span class="cell col1">수량</span>
+				<span class="cell col3">구매날짜</span>
 			</div>
 			<c:choose>
 				<c:when test="${empty fix_list}">
@@ -81,12 +93,13 @@
 				</c:when>
 				<c:otherwise>
 					<c:forEach items="${fix_list}" var="i">
-						<div class="row">
-							<span class="cell col1">이미지</span>
-							<span class="cell col1">${i.name}</span>
-							<span class="cell col2">${i.code}</span>
-							<span class="cell col3">${i.quantity} ${i.quantity_unit}</span>
-							<span class="cell col4">${i.purchase_date}</span>
+						<div class="row list">
+							<div style="display:none;" class="seq">${i.seq}</div>
+							<span class="cell col2">이미지</span>
+							<span class="cell col3">${i.name}</span>
+							<span class="cell col1">${i.code}</span>
+							<span class="cell col1">${i.quantity} ${i.quantity_unit}</span>
+							<span class="cell col3">${i.purchase_date}</span>
 						</div>
 					</c:forEach>
 				</c:otherwise>

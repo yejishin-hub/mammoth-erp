@@ -21,4 +21,14 @@ public class FixDAO {
 	public int insert(FixDTO fdto) {
 		return mybatis.insert("Fixtures.insert", fdto);
 	}
+	public String selectByCategory(String category) {
+		String result = mybatis.selectOne("Fixtures.selectByCategory", category);
+		if(result == null) {
+			result = "검색결과 없음";
+		}
+		return result;
+	}
+	public FixDTO selectBySeq(int seq) {
+		return mybatis.selectOne("Fixtures.selectBySeq", seq);
+	}
 }

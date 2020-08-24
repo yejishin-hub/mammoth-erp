@@ -14,4 +14,7 @@ public class FixFileDAO {
 	public int insert(FixFileDTO ffdto) {
 		return mybatis.insert("Fixtures.insertImage",ffdto);
 	}
+	public FixFileDTO selectFileBySeq(int parent_seq) {
+		return mybatis.selectOne("Fixtures.selectFileBySeq", parent_seq);
+	}
 }

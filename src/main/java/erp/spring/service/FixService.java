@@ -28,4 +28,13 @@ public class FixService {
 		ffdto.setParent_seq(seq);
 		ffdao.insert(ffdto);
 	}
+	public String selectByCategory(String category) {
+		return fdao.selectByCategory(category);
+	}
+	public FixDTO selectBySeq(int seq) {
+		return fdao.selectBySeq(seq);
+	}
+	public FixFileDTO selectFileBySeq(int parent_seq) {
+		return ffdao.selectFileBySeq(parent_seq);
+	}
 }

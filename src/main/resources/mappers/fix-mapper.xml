@@ -15,4 +15,13 @@
 	<select id="getNextval" resultType="int">
 		SELECT LAST_INSERT_ID();
 	</select>
+	<select id="selectByCategory" resultType="string">
+		select code from fixtures where code like CONCAT(#{key}, '%') order by code desc limit 1
+	</select>
+	<select id="selectBySeq" resultType="erp.spring.dto.FixDTO">
+		select * from fixtures where seq = #{seq}
+	</select>
+	<select id="selectFileBySeq" resultType="erp.spring.dto.FixFileDTO">
+		select * from fixtures_file where parent_seq = #{parent_seq}
+	</select>
 </mapper>
